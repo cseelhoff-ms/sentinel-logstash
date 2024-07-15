@@ -359,6 +359,9 @@
                 "tier": "Standard",
                 "capacity": "[parameters('Autoscale_Min')]"
             },
+            "identity": {
+              "type": "SystemAssigned"
+            },
             "properties": {
                 "singlePlacementGroup": true,
                 "upgradePolicy": {
