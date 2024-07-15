@@ -1,0 +1,663 @@
+{
+    "properties": {
+        "immutableId": "dcr-99505ee0585c42c6a27e374430a364de",
+        "dataCollectionEndpointId": "/subscriptions/d8b98a16-2943-4e64-91b9-01a182064f05/resourceGroups/default-RG/providers/Microsoft.Insights/dataCollectionEndpoints/endpoint-east1",
+        "streamDeclarations": {
+            "Custom-Syslog": {
+                "columns": [
+                    {
+                        "name": "TimeGenerated",
+                        "type": "datetime"
+                    },
+                    {
+                        "name": "CollectorHostName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Computer",
+                        "type": "string"
+                    },
+                    {
+                        "name": "EventTime",
+                        "type": "datetime"
+                    },
+                    {
+                        "name": "SyslogMessage",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Facility",
+                        "type": "string"
+                    },
+                    {
+                        "name": "HostIP",
+                        "type": "string"
+                    },
+                    {
+                        "name": "HostName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "ProcessID",
+                        "type": "string"
+                    },
+                    {
+                        "name": "ProcessName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "SeverityLevel",
+                        "type": "string"
+                    },
+                    {
+                        "name": "SourceSystem",
+                        "type": "string"
+                    },
+                    {
+                        "name": "MG",
+                        "type": "string"
+                    }
+                ]
+            },
+            "Custom-CommonSecurityLog": {
+                "columns": [
+                    {
+                        "name": "TimeGenerated",
+                        "type": "datetime"
+                    },
+                    {
+                        "name": "applicationProtocol",
+                        "type": "string"
+                    },
+                    {
+                        "name": "baseEventCount",
+                        "type": "string"
+                    },
+                    {
+                        "name": "bytesIn",
+                        "type": "string"
+                    },
+                    {
+                        "name": "bytesOut",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Computer",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationAddress",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationDnsDomain",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationHostName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationMacAddress",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationNtDomain",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationPort",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationProcessId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationProcessName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationServiceName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationTranslatedAddress",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationTranslatedPort",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationUserId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationUserName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinationUserPrivileges",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceAction",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceAddress",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomDate1",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomDate1Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomDate2",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomDate2Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomFloatingPoint1",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomFloatingPoint1Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomFloatingPoint2",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomFloatingPoint2Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomFloatingPoint3",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomFloatingPoint3Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomFloatingPoint4",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomFloatingPoint4Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomIPv6Address1",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomIPv6Address1Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomIPv6Address2",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomIPv6Address2Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomIPv6Address3",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomIPv6Address3Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomIPv6Address4",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomIPv6Address4Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomNumber1",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomNumber1Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomNumber2",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomNumber2Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomNumber3",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomNumber3Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString1",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString1Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString2",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString2Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString3",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString3Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString4",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString4Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString5",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString5Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString6",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceCustomString6Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceDirection",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceDnsDomain",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceEventCategory",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceEventClassId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceExternalId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceFacility",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceHostName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceInboundInterface",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceMacAddress",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceNtDomain",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceOutboundInterface",
+                        "type": "string"
+                    },
+                    {
+                        "name": "devicePayloadId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceProcessId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceProcessName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceProduct",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceReceiptTime",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceTimeZone",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceTranslatedAddress",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceVendor",
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceVersion",
+                        "type": "string"
+                    },
+                    {
+                        "name": "eventOutcome",
+                        "type": "string"
+                    },
+                    {
+                        "name": "externalId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileCreateTime",
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileHash",
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileModificationTime",
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "filePath",
+                        "type": "string"
+                    },
+                    {
+                        "name": "filePermission",
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileSize",
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileType",
+                        "type": "string"
+                    },
+                    {
+                        "name": "flexDate1",
+                        "type": "string"
+                    },
+                    {
+                        "name": "flexDate1Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "flexNumber1",
+                        "type": "string"
+                    },
+                    {
+                        "name": "flexNumber1Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "flexNumber2",
+                        "type": "string"
+                    },
+                    {
+                        "name": "flexNumber2Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "flexString1",
+                        "type": "string"
+                    },
+                    {
+                        "name": "flexString1Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "flexstring2",
+                        "type": "string"
+                    },
+                    {
+                        "name": "flexstring2Label",
+                        "type": "string"
+                    },
+                    {
+                        "name": "message",
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "oldFileCreateTime",
+                        "type": "string"
+                    },
+                    {
+                        "name": "oldFileHash",
+                        "type": "string"
+                    },
+                    {
+                        "name": "oldFileId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "oldFileModificationTime",
+                        "type": "string"
+                    },
+                    {
+                        "name": "oldFileName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "oldFilePath",
+                        "type": "string"
+                    },
+                    {
+                        "name": "oldFilePermission",
+                        "type": "string"
+                    },
+                    {
+                        "name": "oldFileSize",
+                        "type": "string"
+                    },
+                    {
+                        "name": "oldFileType",
+                        "type": "string"
+                    },
+                    {
+                        "name": "ProcessName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Reason",
+                        "type": "string"
+                    },
+                    {
+                        "name": "requestClientApplication",
+                        "type": "string"
+                    },
+                    {
+                        "name": "requestContext",
+                        "type": "string"
+                    },
+                    {
+                        "name": "requestCookies",
+                        "type": "string"
+                    },
+                    {
+                        "name": "requestMethod",
+                        "type": "string"
+                    },
+                    {
+                        "name": "requestUrl",
+                        "type": "string"
+                    },
+                    {
+                        "name": "severity",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceAddress",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceDnsDomain",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceHostName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceMacAddress",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceNtDomain",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourcePort",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceProcessId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceProcessName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceServiceName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "SourceSystem",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceTranslatedAddress",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceTranslatedPort",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceUserId",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceUserName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sourceUserPrivileges",
+                        "type": "string"
+                    },
+                    {
+                        "name": "transportProtocol",
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "dataSources": {},
+        "destinations": {
+            "logAnalytics": [
+                {
+                    "workspaceResourceId": "/subscriptions/d8b98a16-2943-4e64-91b9-01a182064f05/resourcegroups/default-rg/providers/microsoft.operationalinsights/workspaces/sentinel-default",
+                    "workspaceId": "85eaf31d-8e1d-4487-bacb-9149fd6aa198",
+                    "name": "85eaf31d8e1d4487bacb9149fd6aa198"
+                }
+            ]
+        },
+        "dataFlows": [
+            {
+                "streams": [
+                    "Custom-Syslog"
+                ],
+                "destinations": [
+                    "85eaf31d8e1d4487bacb9149fd6aa198"
+                ],
+                "transformKql": "source | extend ProcessID=toint(ProcessID), MG=toguid(MG)",
+                "outputStream": "Microsoft-Syslog"
+            },
+            {
+                "streams": [
+                    "Custom-CommonSecurityLog"
+                ],
+                "destinations": [
+                    "85eaf31d8e1d4487bacb9149fd6aa198"
+                ],
+                "transformKql": "source | extend SimplifiedDeviceAction=deviceAction,ApplicationProtocol=applicationProtocol,EventCount=toint(baseEventCount),ReceivedBytes=tolong(bytesIn),SentBytes=tolong(bytesOut),DestinationIP=destinationAddress,DestinationDnsDomain=destinationDnsDomain,DestinationHostName=destinationHostName,DestinationMACAddress=destinationMacAddress,DestinationNTDomain=destinationNtDomain,DestinationPort=toint(destinationPort),DestinationProcessId=toint(destinationProcessId),DestinationProcessName=destinationProcessName,DestinationServiceName=destinationServiceName,DestinationTranslatedAddress=destinationTranslatedAddress,DestinationTranslatedPort=toint(destinationTranslatedPort),DestinationUserID=destinationUserId,DestinationUserName=destinationUserName,DestinationUserPrivileges=destinationUserPrivileges,DeviceAction=deviceAction,DeviceAddress=deviceAddress,DeviceCustomDate1=deviceCustomDate1,DeviceCustomDate1Label=deviceCustomDate1Label,DeviceCustomDate2=deviceCustomDate2,DeviceCustomDate2Label=deviceCustomDate2Label,DeviceCustomFloatingPoint1=toreal(deviceCustomFloatingPoint1),DeviceCustomFloatingPoint1Label=deviceCustomFloatingPoint1Label,DeviceCustomFloatingPoint2=toreal(deviceCustomFloatingPoint2),DeviceCustomFloatingPoint2Label=deviceCustomFloatingPoint2Label,DeviceCustomFloatingPoint3=toreal(deviceCustomFloatingPoint3),DeviceCustomFloatingPoint3Label=deviceCustomFloatingPoint3Label,DeviceCustomFloatingPoint4=toreal(deviceCustomFloatingPoint4),DeviceCustomFloatingPoint4Label=deviceCustomFloatingPoint4Label,DeviceCustomIPv6Address1=deviceCustomIPv6Address1,DeviceCustomIPv6Address1Label=deviceCustomIPv6Address1Label,DeviceCustomIPv6Address2=deviceCustomIPv6Address2,DeviceCustomIPv6Address2Label=deviceCustomIPv6Address2Label,DeviceCustomIPv6Address3=deviceCustomIPv6Address3,DeviceCustomIPv6Address3Label=deviceCustomIPv6Address3Label,DeviceCustomIPv6Address4=deviceCustomIPv6Address4,DeviceCustomIPv6Address4Label=deviceCustomIPv6Address4Label,DeviceCustomNumber1=toint(deviceCustomNumber1),FieldDeviceCustomNumber1=tolong(deviceCustomNumber1),DeviceCustomNumber1Label=deviceCustomNumber1Label,DeviceCustomNumber2=toint(deviceCustomNumber2),FieldDeviceCustomNumber2=tolong(deviceCustomNumber2),DeviceCustomNumber2Label=deviceCustomNumber2Label,DeviceCustomNumber3=toint(deviceCustomNumber3),FieldDeviceCustomNumber3=tolong(deviceCustomNumber3),DeviceCustomNumber3Label=deviceCustomNumber3Label,DeviceCustomString1=deviceCustomString1,DeviceCustomString1Label=deviceCustomString1Label,DeviceCustomString2=deviceCustomString2,DeviceCustomString2Label=deviceCustomString2Label,DeviceCustomString3=deviceCustomString3,DeviceCustomString3Label=deviceCustomString3Label,DeviceCustomString4=deviceCustomString4,DeviceCustomString4Label=deviceCustomString4Label,DeviceCustomString5=deviceCustomString5,DeviceCustomString5Label=deviceCustomString5Label,DeviceCustomString6=deviceCustomString6,DeviceCustomString6Label=deviceCustomString6Label,CommunicationDirection=deviceDirection,DeviceDnsDomain=deviceDnsDomain,DeviceEventCategory=deviceEventCategory,DeviceEventClassID=deviceEventClassId,DeviceExternalID=deviceExternalId,DeviceFacility=deviceFacility,DeviceInboundInterface=deviceInboundInterface,DeviceMacAddress=deviceMacAddress,DeviceName=deviceHostName,DeviceNtDomain=deviceNtDomain,DeviceOutboundInterface=deviceOutboundInterface,DevicePayloadId=devicePayloadId,ProcessID=toint(deviceProcessId),ProcessName=deviceProcessName,DeviceProduct=deviceProduct,ReceiptTime=deviceReceiptTime,DeviceTimeZone=deviceTimeZone,DeviceTranslatedAddress=deviceTranslatedAddress,DeviceVendor=deviceVendor,DeviceVersion=deviceVersion,EventOutcome=eventOutcome,ExtID=externalId,FileCreateTime=fileCreateTime,FileHash=fileHash,FileID=fileId,FileModificationTime=fileModificationTime,FileName=fileName,FilePath=filePath,FilePermission=filePermission,FileSize=toint(fileSize),FileType=fileType,FlexDate1=flexDate1,FlexDate1Label=flexDate1Label,FlexNumber1=toint(flexNumber1),FlexNumber1Label=flexNumber1Label,FlexNumber2=toint(flexNumber2),FlexNumber2Label=flexNumber2Label,FlexString1=flexString1,FlexString1Label=flexString1Label,FlexString2=flexstring2,FlexString2Label=flexstring2Label,Message=message,Activity=name,OldFileCreateTime=oldFileCreateTime,OldFileHash=oldFileHash,OldFileID=oldFileId,OldFileModificationTime=oldFileModificationTime,OldFileName=oldFileName,OldFilePath=oldFilePath,OldFilePermission=oldFilePermission,OldFileSize=toint(oldFileSize),OldFileType=oldFileType,Reason=Reason,RequestClientApplication=requestClientApplication,RequestContext=requestContext,RequestCookies=requestCookies,RequestMethod=requestMethod,RequestURL=requestUrl,LogSeverity=severity,SourceIP=sourceAddress,SourceDnsDomain=sourceDnsDomain,SourceHostName=sourceHostName,SourceMACAddress=sourceMacAddress,SourceNTDomain=sourceNtDomain,SourcePort=toint(sourcePort),SourceProcessId=toint(sourceProcessId),SourceProcessName=sourceProcessName,SourceServiceName=sourceServiceName,SourceSystem=SourceSystem,SourceTranslatedAddress=sourceTranslatedAddress,SourceTranslatedPort=toint(sourceTranslatedPort),SourceUserID=sourceUserId,SourceUserName=sourceUserName,SourceUserPrivileges=sourceUserPrivileges,Protocol=transportProtocol,EventType=toint(type)",
+                "outputStream": "Microsoft-CommonSecurityLog"
+            }
+        ],
+        "provisioningState": "Succeeded"
+    },
+    "location": "eastus",
+    "tags": {},
+    "id": "/subscriptions/d8b98a16-2943-4e64-91b9-01a182064f05/resourceGroups/default-RG/providers/Microsoft.Insights/dataCollectionRules/test3",
+    "name": "test3",
+    "type": "Microsoft.Insights/dataCollectionRules",
+    "etag": "\"3f02647b-0000-0100-0000-668f3d860000\"",
+    "systemData": {
+        "createdBy": "yoda@slowjedi.com",
+        "createdByType": "User",
+        "createdAt": "2024-07-11T01:31:16.3551441Z",
+        "lastModifiedBy": "yoda@slowjedi.com",
+        "lastModifiedByType": "User",
+        "lastModifiedAt": "2024-07-11T02:03:49.1192263Z"
+    }
+}
