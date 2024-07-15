@@ -36,8 +36,7 @@
         "autoscale_Name": "[concat(parameters('Base_Name'),'-autoscale')]",
         "loadbalancer_Name": "[concat(parameters('Base_Name'),'-lb')]",
         "maxPortRange": "[if(lessOrEquals(parameters('Autoscale_Max'), 9), '5000', '500')]",
-        "tenantId": "[subscription().tenantId]",
-        "cloudinit": "#cloud-config\npackage_upgrade: true\npackages:\n  - default-jre\nruncmd:\n  - wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic-keyring.gpg\n  - sudo apt-get update\n  - sudo apt-get install -y apt-transport-https\n  - echo \"deb [signed-by=/usr/share/keyrings/elastic-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main\" | sudo tee -a /etc/apt/sources.list.d/elastic-8.x.list\n  - sudo apt-get update\n  - sudo apt-get install -y default-jre\n  - sudo echo \\\"root         soft    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"root         hard    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"*         soft    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"*         hard    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo apt-get install -y logstash\n  - sudo /usr/share/logstash/bin/logstash-plugin install microsoft-sentinel-logstash-output\n  - sudo /usr/share/logstash/bin/logstash-plugin update\n  - wget -q https://raw.githubusercontent.com/cseelhoff-ms/sentinel-logstash/main/logstash.conf -O /etc/logstash/conf.d/logstash.conf\n  - sed -i 's/tenant_id => \"\"/tenant_id => \"00ac9db9-508a-473b-aded-53250025bd24\"/g; s/data_collection_endpoint => \"\"/data_collection_endpoint => \"https:\\/\\/endpoint-east1-i1d0.eastus-1.ingest.monitor.azure.com\"/g; s/dcr_immutable_id => \"\"/dcr_immutable_id => \"dcr-99505ee0585c42c6a27e374430a364de\"/g' /etc/logstash/conf.d/logstash.conf\n  - sudo systemctl start logstash.service\n  - sudo systemctl enable logstash.service"
+        "cloudinit": "[concat('#cloud-config\npackage_upgrade: true\nruncmd:\n  - wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic-keyring.gpg\n  - sudo apt-get update\n  - sudo apt-get install -y apt-transport-https\n  - echo \"deb [signed-by=/usr/share/keyrings/elastic-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main\" | sudo tee -a /etc/apt/sources.list.d/elastic-8.x.list\n  - sudo apt-get update\n  - sudo echo \\\"root         soft    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"root         hard    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"*         soft    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"*         hard    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo apt-get install -y logstash\n  - sudo /usr/share/logstash/bin/logstash-plugin install microsoft-sentinel-logstash-output\n  - sudo /usr/share/logstash/bin/logstash-plugin update\n  - wget -q https://raw.githubusercontent.com/cseelhoff-ms/sentinel-logstash/main/logstash.conf -O /etc/logstash/conf.d/logstash.conf\n- sed -i \"s/TENANT_ID_HERE/', parameters('subscription').tenantId, '/g; s/DATA_COLLECTION_ENDPOINT_URL_HERE/', parameters('data_collection_endpoint_url'), '/g; s/DCR_IMMUTABLE_ID_HERE/', parameters('dcr_immutable_id'), '/g\" /etc/logstash/conf.d/logstash.conf\n  - sudo systemctl start logstash.service\n  - sudo systemctl enable logstash.service')]"
     },
     "resources": [
         {
@@ -62,7 +61,7 @@
             "properties": {
                 "securityRules": [
                     {
-                        "name": "Allow-Syslog",
+                        "name": "Allow-Syslog-514",
                         "properties": {
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -91,27 +90,6 @@
                             "sourceAddressPrefix": "*",
                             "destinationAddressPrefix": "*",
                             "access": "Allow",
-                            "priority": 1002,
-                            "direction": "Inbound",
-                            "sourcePortRanges": [
-                            ],
-                            "destinationPortRanges": [
-                            ],
-                            "sourceAddressPrefixes": [
-                            ],
-                            "destinationAddressPrefixes": [
-                            ]
-                        }
-                    },
-                    {
-                        "name": "Allow-SSH",
-                        "properties": {
-                            "protocol": "*",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "22",
-                            "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "*",
-                            "access": "Allow",
                             "priority": 1001,
                             "direction": "Inbound",
                             "sourcePortRanges": [
@@ -124,84 +102,6 @@
                             ]
                         }
                     }
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-09-01",
-            "name": "[concat(variables('nsg_Name'), '/Allow-Syslog')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsg_Name'))]"
-            ],
-            "properties": {
-                "protocol": "Tcp",
-                "sourcePortRange": "*",
-                "destinationPortRange": "514",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "*",
-                "access": "Allow",
-                "priority": 1000,
-                "direction": "Inbound",
-                "sourcePortRanges": [
-                ],
-                "destinationPortRanges": [
-                ],
-                "sourceAddressPrefixes": [
-                ],
-                "destinationAddressPrefixes": [
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-09-01",
-            "name": "[concat(variables('nsg_Name'), '/Allow-Syslog-5514')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsg_Name'))]"
-            ],
-            "properties": {
-                "protocol": "Tcp",
-                "sourcePortRange": "*",
-                "destinationPortRange": "5514",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "*",
-                "access": "Allow",
-                "priority": 1002,
-                "direction": "Inbound",
-                "sourcePortRanges": [
-                ],
-                "destinationPortRanges": [
-                ],
-                "sourceAddressPrefixes": [
-                ],
-                "destinationAddressPrefixes": [
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-09-01",
-            "name": "[concat(variables('nsg_Name'), '/Allow-SSH')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsg_Name'))]"
-            ],
-            "properties": {
-                "protocol": "Tcp",
-                "sourcePortRange": "*",
-                "destinationPortRange": "22",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "*",
-                "access": "Allow",
-                "priority": 1001,
-                "direction": "Inbound",
-                "sourcePortRanges": [
-                ],
-                "destinationPortRanges": [
-                ],
-                "sourceAddressPrefixes": [
-                ],
-                "destinationAddressPrefixes": [
                 ]
             }
         },
