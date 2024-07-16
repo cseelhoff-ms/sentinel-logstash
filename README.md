@@ -1,4 +1,4 @@
-# VMSS ARM Template
+# Sentinel-Logstash VMSS ARM Template
 
 Before running the VMSS ARM template:
 1. Create a DCR/DCE as needed based on the DCR template included in this repo
