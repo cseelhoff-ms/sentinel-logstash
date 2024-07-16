@@ -30,3 +30,5 @@ echo "CEF:0|Device Vendor|Device Product|Device Version|DeviceEventClassID|Name|
 - Use the stdout output plugin to examine the console of the logstash process to debug how messages are received and parsed
 - If you are struggling with managed identity, try testing with a new registered AppID and Client Secret
 - More technical info about the output plugin here: https://www.rubydoc.info/gems/microsoft-sentinel-log-analytics-logstash-output-plugin/
+
+Credit for VMSS template, largely copied from Microsoft team here: https://github.com/Azure/Azure-Sentinel/tree/master/DataConnectors/Logstash-VMSS
