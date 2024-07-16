@@ -2,6 +2,7 @@
 
 Before running the VMSS ARM template:
 1. Create a DCR/DCE as needed based on the DCR template included in this repo
+2. Consider replacing the cloudinit commands in the VMSS ARM Template that use wget and sed against this repo's logstash.conf. Instead point this to your own logstash.conf
 
 After running the VMSS ARM template:
 1. Ensure the identity for the VMSS is added to the "Monitoring Metrics Publisher" role for the DCR
