@@ -2,7 +2,8 @@
 This project includes a VMSS ARM template that auto-scales and load-balances based on Logstash and the new output plugin for Log Analytics using managed identities.
 It also includes a dockerfile for quick logstash debugging efforts.
 
-This project draws heavy inspiration from: https://github.com/Azure/Azure-Sentinel/tree/master/DataConnectors/Logstash-VMSS but improves upon it without the need for shared secrets and supports a complete mapping (dozens of columns) of the native Microsoft-Syslog and Microsoft-CommonSecurityEvent tables without the requirement of an AMA agent.
+This project draws heavy inspiration from: https://github.com/Azure/Azure-Sentinel/tree/master/DataConnectors/Logstash-VMSS
+But this project improves upon it by not requiring shared secrets nor AMA. It also supports a complete mapping (dozens of columns) of the native Microsoft-Syslog and Microsoft-CommonSecurityEvent tables and of course Custom Tables from any ingestion source that logstash supports (json, syslog, cef, ect...)
 
 Before running the VMSS ARM template:
 1. Create a DCR/DCE as needed based on the DCR template included in this repo
@@ -34,5 +35,3 @@ echo "CEF:0|Device Vendor|Device Product|Device Version|DeviceEventClassID|Name|
 - Use the stdout output plugin to examine the console of the logstash process to debug how messages are received and parsed
 - If you are struggling with managed identity, try testing with a new registered AppID and Client Secret
 - More technical info about the output plugin here: https://www.rubydoc.info/gems/microsoft-sentinel-log-analytics-logstash-output-plugin/
-
-Credit for VMSS template, largely copied from Microsoft team here: https://github.com/Azure/Azure-Sentinel/tree/master/DataConnectors/Logstash-VMSS
