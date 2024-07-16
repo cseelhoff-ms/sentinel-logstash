@@ -7,7 +7,7 @@
         },
         "Autoscale_Min": {
             "type": "int",
-            "defaultValue": 1
+            "defaultValue": 2
         },
         "Autoscale_Max": {
             "type": "int",
@@ -25,6 +25,9 @@
         },
         "dcr_immutable_id": {
             "type": "string"
+        },
+        "tenantId": {
+            "type": "string"
         }
     },
     "variables": {
@@ -36,7 +39,7 @@
         "autoscale_Name": "[concat(parameters('Base_Name'),'-autoscale')]",
         "loadbalancer_Name": "[concat(parameters('Base_Name'),'-lb')]",
         "maxPortRange": "[if(lessOrEquals(parameters('Autoscale_Max'), 9), '5000', '500')]",
-        "cloudinit": "[concat('#cloud-config\npackage_upgrade: true\nruncmd:\n  - wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic-keyring.gpg\n  - sudo apt-get update\n  - sudo apt-get install -y apt-transport-https\n  - echo \"deb [signed-by=/usr/share/keyrings/elastic-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main\" | sudo tee -a /etc/apt/sources.list.d/elastic-8.x.list\n  - sudo apt-get update\n  - sudo echo \\\"root         soft    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"root         hard    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"*         soft    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"*         hard    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo apt-get install -y logstash\n  - sudo /usr/share/logstash/bin/logstash-plugin install microsoft-sentinel-logstash-output\n  - sudo /usr/share/logstash/bin/logstash-plugin update\n  - wget -q https://raw.githubusercontent.com/cseelhoff-ms/sentinel-logstash/main/logstash.conf -O /etc/logstash/conf.d/logstash.conf\n- sed -i \"s/TENANT_ID_HERE/', parameters('subscription').tenantId, '/g; s/DATA_COLLECTION_ENDPOINT_URL_HERE/', parameters('data_collection_endpoint_url'), '/g; s/DCR_IMMUTABLE_ID_HERE/', parameters('dcr_immutable_id'), '/g\" /etc/logstash/conf.d/logstash.conf\n  - sudo systemctl start logstash.service\n  - sudo systemctl enable logstash.service')]"
+        "cloudinit": "[concat('#cloud-config\nruncmd:\n  - wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic-keyring.gpg\n  - sudo apt-get update\n  - sudo apt-get install -y apt-transport-https\n  - echo \"deb [signed-by=/usr/share/keyrings/elastic-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main\" | sudo tee -a /etc/apt/sources.list.d/elastic-8.x.list\n  - sudo apt-get update\n  - sudo echo \\\"root         soft    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"root         hard    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"*         soft    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo echo \\\"*         hard    nofile         65536\\\" >> /etc/security/limits.conf\n  - sudo apt-get install -y logstash\n  - sudo /usr/share/logstash/bin/logstash-plugin install microsoft-sentinel-logstash-output\n  - sudo /usr/share/logstash/bin/logstash-plugin update\n  - wget -q https://raw.githubusercontent.com/cseelhoff-ms/sentinel-logstash/main/logstash.conf -O /etc/logstash/conf.d/logstash.conf\n  - sed -i \"s|TENANT_ID_HERE|', parameters('tenantId'), '|g; s|DATA_COLLECTION_ENDPOINT_URL_HERE|', parameters('data_collection_endpoint_url'), '|g; s|DCR_IMMUTABLE_ID_HERE|', parameters('dcr_immutable_id'), '|g\" /etc/logstash/conf.d/logstash.conf\n  - sudo systemctl start logstash.service\n  - sudo systemctl enable logstash.service')]"
     },
     "resources": [
         {
