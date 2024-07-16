@@ -1,7 +1,4 @@
 #cloud-config
-package_upgrade: true
-packages:
-  - default-jre
 runcmd:
   - wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic-keyring.gpg
   - sudo apt-get update
@@ -17,6 +14,6 @@ runcmd:
   - sudo /usr/share/logstash/bin/logstash-plugin install microsoft-sentinel-logstash-output
   - sudo /usr/share/logstash/bin/logstash-plugin update
   - wget -q https://raw.githubusercontent.com/cseelhoff-ms/sentinel-logstash/main/logstash.conf -O /etc/logstash/conf.d/logstash.conf
-  - sed -i "s/TENANT_ID_HERE/00ac9db9-508a-473b-aded-53250025bd24/g; s/DATA_COLLECTION_ENDPOINT_URL_HERE/abcd/g; s/DCR_IMMUTABLE_ID_HERE/dcr-99505ee0585c42c6a27e374430a364de/g" /etc/logstash/conf.d/logstash.conf
+  - sed -i "s|TENANT_ID_HERE|TENANT_ID_HERE|g; s|DATA_COLLECTION_ENDPOINT_URL_HERE|DATA_COLLECTION_ENDPOINT_URL_HERE|g; s|DCR_IMMUTABLE_ID_HERE|DCR_IMMUTABLE_ID_HERE|g" /etc/logstash/conf.d/logstash.conf
   - sudo systemctl start logstash.service
   - sudo systemctl enable logstash.service
