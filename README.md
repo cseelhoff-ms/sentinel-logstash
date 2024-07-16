@@ -1,4 +1,8 @@
 # Sentinel-Logstash VMSS ARM Template
+This project includes a VMSS ARM template that auto-scales and load-balances based on Logstash and the new output plugin for Log Analytics using managed identities.
+It also includes a dockerfile for quick logstash debugging efforts.
+
+This project draws heavy inspiration from: https://github.com/Azure/Azure-Sentinel/tree/master/DataConnectors/Logstash-VMSS but improves upon it without the need for shared secrets and supports a complete mapping (dozens of columns) of the native Microsoft-Syslog and Microsoft-CommonSecurityEvent tables without the requirement of an AMA agent.
 
 Before running the VMSS ARM template:
 1. Create a DCR/DCE as needed based on the DCR template included in this repo
