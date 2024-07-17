@@ -64,27 +64,6 @@
             "properties": {
                 "securityRules": [
                     {
-                        "name": "Allow-Syslog-514",
-                        "properties": {
-                            "protocol": "*",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "514",
-                            "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "*",
-                            "access": "Allow",
-                            "priority": 1000,
-                            "direction": "Inbound",
-                            "sourcePortRanges": [
-                            ],
-                            "destinationPortRanges": [
-                            ],
-                            "sourceAddressPrefixes": [
-                            ],
-                            "destinationAddressPrefixes": [
-                            ]
-                        }
-                    },
-                    {
                         "name": "Allow-Syslog-5514",
                         "properties": {
                             "protocol": "*",
@@ -93,7 +72,7 @@
                             "sourceAddressPrefix": "*",
                             "destinationAddressPrefix": "*",
                             "access": "Allow",
-                            "priority": 1001,
+                            "priority": 1000,
                             "direction": "Inbound",
                             "sourcePortRanges": [
                             ],
