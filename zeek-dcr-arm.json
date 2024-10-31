@@ -1,0 +1,191 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "dataCollectionRuleName": {
+      "type": "string",
+      "defaultValue": "zeek-dcr",
+      "metadata": {
+        "description": "Unique name for the DCR"
+      }
+    },
+    "dataCollectionEndpointResourceId": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource ID of the data collection endpoint (DCE)"
+      }
+    },
+    "filePatterns": {
+      "type": "string",
+      "defaultValue": "/opt/zeek/logs/current/conn.log",
+      "metadata": {
+        "description": "Path on the local disk for the log file to collect"
+      }
+    },
+    "workspaceResourceId": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource ID of the Log Analytics workspace"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Insights/dataCollectionRules",
+      "apiVersion": "2022-06-01",
+      "name": "[parameters('dataCollectionRuleName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "dataCollectionEndpointId": "[parameters('dataCollectionEndpointResourceId')]",
+        "streamDeclarations": {
+          "Custom-Json-stream": {
+            "columns": [
+              {
+                "name": "ts",
+                "type": "real"
+              },
+              {
+                "name": "uid",
+                "type": "string"
+              },
+              {
+                "name": "id.orig_h",
+                "type": "string"
+              },
+              {
+                "name": "id.orig_p",
+                "type": "string"
+              },
+              {
+                "name": "id.resp_h",
+                "type": "string"
+              },
+              {
+                "name": "id.resp_p",
+                "type": "string"
+              },
+              {
+                "name": "proto",
+                "type": "string"
+              },
+              {
+                "name": "service",
+                "type": "string"
+              },
+              {
+                "name": "duration",
+                "type": "int"
+              },
+              {
+                "name": "orig_bytes",
+                "type": "long"
+              },
+              {
+                "name": "resp_bytes",
+                "type": "long"
+              },
+              {
+                "name": "conn_state",
+                "type": "string"
+              },
+              {
+                "name": "local_orig",
+                "type": "boolean"
+              },
+              {
+                "name": "local_resp",
+                "type": "boolean"
+              },
+              {
+                "name": "missed_bytes",
+                "type": "long"
+              },
+              {
+                "name": "history",
+                "type": "string"
+              },
+              {
+                "name": "orig_pkts",
+                "type": "long"
+              },
+              {
+                "name": "orig_ip_bytes",
+                "type": "long"
+              },
+              {
+                "name": "resp_pkts",
+                "type": "long"
+              },
+              {
+                "name": "resp_ip_bytes",
+                "type": "long"
+              },
+              {
+                "name": "tunnel_parents",
+                "type": "dynamic"
+              },
+              {
+                "name": "community_id",
+                "type": "string"
+              },
+              {
+                "name": "orig_l2_addr",
+                "type": "string"
+              },
+              {
+                "name": "resp_l2_addr",
+                "type": "string"
+              },
+              {
+                "name": "vlan",
+                "type": "string"
+              },
+              {
+                "name": "inner_vlan",
+                "type": "string"
+              },
+              {
+                "name": "speculative_service",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "dataSources": {
+          "logFiles": [
+            {
+              "streams": [
+                "Custom-Json-stream"
+              ],
+              "filePatterns": [
+                "[parameters('filePatterns')]"
+              ],
+              "format": "json",
+              "name": "Custom-Json-stream"
+            }
+          ]
+        },
+        "destinations": {
+          "logAnalytics": [
+            {
+              "workspaceResourceId": "[parameters('workspaceResourceId')]",
+              "name": "workspace"
+            }
+          ]
+        },
+        "dataFlows": [
+          {
+            "streams": [
+              "Custom-Json-stream"
+            ],
+            "destinations": [
+              "workspace"
+            ],
+            "transformKql": "source | extend TimeGenerated = datetime_add('second', toint(ts), datetime(1970-01-01T00:00:00Z)) | extend EventCount = int(1), EventProduct = 'Zeek', EventVendor='Zeek', EventSchema = 'NetworkSession', EventSchemaVersion='0.2.4', EventType='Flow', EventStartTime = TimeGenerated, EventEndTime = TimeGenerated, SrcIpAddr = ['id.orig_h'], SrcPortNumber = toint(['id.orig_p']), DstIpAddr = ['id.resp_h'], DstPortNumber = toint(['id.resp_p']) | project-rename EventOriginalUid = uid, NetworkApplicationProtocol = service, NetworkDuration = duration, SrcBytes = orig_bytes, DstBytes = resp_bytes, FlowMissedBytes = missed_bytes, SrcPackets = orig_pkts, DstPackets = resp_pkts, SrcMacAddr = orig_l2_addr, DstMacAddr = resp_l2_addr, DstVlanId = vlan, SrcVlanId = inner_vlan, FlowHistory = history, NetworkSessionId = community_id | extend NetworkDirection = iff(local_orig == false and local_resp == true, 'Inbound', iff(local_orig == true and local_resp == false, 'Outbound', iff(local_orig == true and local_resp == true, 'Local', iff(local_orig == false and local_resp == false, 'Local', 'Unknown')))), NetworkBytes = SrcBytes + DstBytes, NetworkPackets = SrcPackets + DstPackets, NetworkProtocol = toupper(proto), IpAddr=SrcIpAddr, Src=SrcIpAddr, Duration=NetworkDuration, SessionId = NetworkSessionId, InnerVlanId = SrcVlanId, OuterVlanId = DstVlanId, Dst=DstIpAddr, EventResult = iff(conn_state in ('S0', 'S1', 'SF', 'OTH'), 'Success', iff(conn_state in ('REJ', 'S2', 'S3', 'RSTO', 'RSTR', 'RSTOS0', 'RSTRH', 'SH', 'SHR'), 'Failure', 'Unknown')) | project-away local_orig, local_resp, conn_state",
+            "outputStream": "Microsoft-ASimNetworkSessionLogs"
+          }
+        ]
+      }
+    }
+  ]
+}
