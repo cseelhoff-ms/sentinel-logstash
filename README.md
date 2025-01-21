@@ -35,3 +35,10 @@ echo "CEF:0|Device Vendor|Device Product|Device Version|DeviceEventClassID|Name|
 - Use the stdout output plugin to examine the console of the logstash process to debug how messages are received and parsed
 - If you are struggling with managed identity, try testing with a new registered AppID and Client Secret
 - More technical info about the output plugin here: https://www.rubydoc.info/gems/microsoft-sentinel-logstash-output/1.2.3
+- Did the user running logstash able to obtain a bearer token?
+- ```
+  sudo usermod -aG himds <username>
+  CHALLENGE_TOKEN_PATH=$(curl -s -D - -H Metadata:true "http://127.0.0.1:40342/metadata/identity/oauth2/token?api-version=2019-11-01&resource=https%3A%2F%2Fmanagement.azure.com" | grep Www-Authenticate | cut -d "=" -f 2 | tr -d "[:cntrl:]") 
+  CHALLENGE_TOKEN=$(cat $CHALLENGE_TOKEN_PATH) 
+  curl -s -H Metadata:true -H "Authorization: Basic $CHALLENGE_TOKEN" "http://127.0.0.1:40342/metadata/identity/oauth2/token?api-version=2019-11-01&resource=https%3A%2F%2Fmanagement.azure.com"
+```
